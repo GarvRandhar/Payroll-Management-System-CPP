@@ -13,24 +13,20 @@ struct Employee {
     float netPay;
 };
 
-// Function to display the system title
 void displaySystemTitle() {
     cout << "|-------------------------------------------------------|" << endl;
     cout << "|       WELCOME TO THE PAYROLL MANAGEMENT SYSTEM        |" << endl;
     cout << "|-------------------------------------------------------|" << endl;
 }
 
-// Function to calculate gross pay
 float calculateGrossPay(float rate, int hour, int day, float over, float overh) {
     return (rate * hour * day) + (over * overh);
 }
 
-// Function to calculate net pay after deductions
 float calculateNetPay(float grossPay, float taxRate) {
     return grossPay - (grossPay * taxRate);
 }
 
-// Function to display an employee's payslip
 void displayPayslip(const Employee& emp) {
     cout << "\n|--------------------------------------------------|" << endl;
     cout << "|      :::::::::: Employee Payslip ::::::::::      |" << endl;
@@ -43,7 +39,6 @@ void displayPayslip(const Employee& emp) {
     cout << "|--------------------------------------------------|\n" << endl;
 }
 
-// Function to save an employee's payslip to a file
 void savePayslipToFile(const Employee& emp) {
     ofstream file("payslips.txt", ios::app);
     if (file.is_open()) {
@@ -65,12 +60,11 @@ void savePayslipToFile(const Employee& emp) {
 int main() {
     vector<Employee> employees;
     char choice;
-    const float taxRate = 0.10f; // 10% tax rate
+    const float taxRate = 0.10f; 
 
     displaySystemTitle();
 
     do {
-        // Variables for employee details
         string firstname, lastname;
         int eno, hour, day;
         float rate, over, overh;
@@ -117,15 +111,12 @@ int main() {
             continue;
         }
 
-        // Calculate pays
         float grossPay = calculateGrossPay(rate, hour, day, over, overh);
         float netPay = calculateNetPay(grossPay, taxRate);
 
-        // Create an Employee record
         Employee emp = {firstname, lastname, eno, grossPay, netPay};
         employees.push_back(emp);
 
-        // Display and save payslip
         displayPayslip(emp);
         savePayslipToFile(emp);
 
